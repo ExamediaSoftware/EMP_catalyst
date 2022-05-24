@@ -108,4 +108,8 @@ return [
 
     'password_timeout' => 10800,
 
+    'verification' => [
+        'expire' => 60, // One hour in minutes - enter as many minutes as you would like here
+    ],
+
 ];
