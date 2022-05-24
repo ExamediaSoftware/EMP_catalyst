@@ -69,8 +69,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    // 'timezone' => 'UTC',
+    'timezone' => 'Asia/Kuala_Lumpur',
+    
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -96,6 +97,19 @@ return [
     */
 
     'fallback_locale' => 'en',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available locales
+    |--------------------------------------------------------------------------
+    |
+    | List all locales that your application works with
+    |
+    */
+    'available_locales' => [
+        'EN' => 'en',
+        'BM' => 'bm',
+    ],
 
     /*
     |--------------------------------------------------------------------------
