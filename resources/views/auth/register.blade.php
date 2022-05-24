@@ -45,15 +45,20 @@
                     </x-jet-label>
                 </div>
             @endif
+            
+            <div class="flex mt-4">
+            @include('partials/language_switcher')
+            
+                <div class="flex items-center justify-end mt-4">
+                    
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                        {{ __('Already registered?') }}
+                    </a>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
+                    <x-jet-button class="ml-4">
+                        {{ __('Register') }}
+                    </x-jet-button>
+                </div>
             </div>
         </form>
     </x-jet-authentication-card>
