@@ -17,23 +17,23 @@ return new class extends Migration
             $table->id();
             
             //FK for User Table
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->text('company_name');
-            $table->string('business_reg_no');
-            $table->string('business_reg_year');
-            $table->integer('company_type');
-            $table->integer('sector_type');
-            $table->string('business_desc',255);
-            $table->string('address_line1',255);
-            $table->string('address_line2',255);
-            $table->string('postcode',255);
-            $table->string('city',255);
-            $table->string('state',255);
-            $table->integer('office_number');
-            $table->integer('fax_number');
-            $table->integer('acknowledgement');
+            $table->text('company_name')->nullable();
+            $table->string('business_reg_no')->nullable();
+            $table->string('business_reg_year')->nullable();
+            $table->integer('company_type')->nullable();
+            $table->integer('sector_type')->nullable();
+            $table->string('business_desc',255)->nullable();
+            $table->string('address_line1',255)->nullable();
+            $table->string('address_line2',255)->nullable();
+            $table->string('postcode',255)->nullable();
+            $table->string('city',255)->nullable();
+            $table->string('state',255)->nullable();
+            $table->integer('office_number')->nullable();
+            $table->integer('fax_number')->nullable();
+            $table->integer('acknowledgement')->nullable();
 
             //FK on USERS
             $table->bigInteger('created_by')->unsigned()->nullable();
