@@ -19,9 +19,9 @@ return new class extends Migration
             //FK from applications Table
              $table->bigInteger('application_id')->unsigned()->nullable();
              $table->foreign('application_id')->references('id')->on('applications');
+             $table->integer('application_status_id');
             
              $table->double('video_score',3,2);
-
              //FK for User Table
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');

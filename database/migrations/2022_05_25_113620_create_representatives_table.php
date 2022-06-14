@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('rep_age');
             $table->string('rep_email',50);
             $table->integer('rep_phone');
+            $table->string('rep_as', 20)->nullable();
 
             $table->timestamps();
         });

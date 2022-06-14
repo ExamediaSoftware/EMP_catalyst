@@ -15,7 +15,6 @@ class UserProfileController extends Controller
      */
     public function show(Request $request)
     {
-        // dd($request->user());
         return view('profile.show', [
             'request' => $request,
             'user' => $request->user(),

@@ -19,6 +19,8 @@ class AdminUserSeeder extends Seeder
     {
         $adminRole = Role::create(['name' => 'Admin']);
         $applicantRole = Role::create(['name' => 'Applicant']);
+        $verifierRole = Role::create(['name' => 'Verifier']);
+        $superRole = Role::create(['name' => 'Super-Admin']);
         // $permission = Permission::create(['name' => 'manage tasks']);
         // $permission->assignRole($adminRole);
  

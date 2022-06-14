@@ -916,7 +916,7 @@ h5,
 h6,
 p,
 a {
-    text-transform: capitalize
+    text-transform: none;
 }
 
 p {

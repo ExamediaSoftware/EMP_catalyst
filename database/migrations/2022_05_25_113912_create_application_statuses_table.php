@@ -20,11 +20,9 @@ return new class extends Migration
             $table->bigInteger('application_id')->unsigned()->nullable();
             $table->foreign('application_id')->references('id')->on('applications');
 
-            $table->integer('status_id');
-            $table->string('section',50);
-            $table->string('comment',100);
-            $table->date('date_interview');
-            $table->double('interview_score',3,2);
+            $table->string('status_id',10);
+            
+            
             // $table->date('created_at');
             // $table->string('created_by',255);
             // $table->date('updated_at');

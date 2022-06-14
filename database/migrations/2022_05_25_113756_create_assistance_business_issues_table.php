@@ -20,12 +20,10 @@ return new class extends Migration
             $table->bigInteger('application_id')->unsigned()->nullable();
             $table->foreign('application_id')->references('id')->on('applications');
 
-            $table->integer('issue1');
-            $table->string('issue1_desc',200);
-            $table->integer('issue2');
-            $table->string('issue2_desc',200);
-            $table->integer('issue3');
-            $table->string('issue3_desc',200);
+            $table->string('issue', 20);
+            $table->integer('issue_priority');
+            $table->string('issue_desc',200)->nullable();
+            
 
             $table->timestamps();
         });

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('parameter_name',250);
             $table->string('type_id')->unique();
             $table->string('type_name',250);
-            $table->integer('subtype_id')->unique()->nullable();
+            $table->integer('subtype_id')->nullable();
             $table->string('subtype_name',250)->nullable();
 
             $table->timestamps();

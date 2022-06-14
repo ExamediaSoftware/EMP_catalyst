@@ -18,19 +18,30 @@
       <!-- link -->
       <a href="{{ route('dashboard') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
         <i class="fad fa-chart-pie text-xs mr-2"></i>                
-        Dashboard
+        {{__('Dashboard')}}
       </a>
       <!-- end link -->
 
       <!-- link -->
       {{--  --}}
-      <a href="{{route('application')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+      <a href="{{route('list-application.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
         <i class="fad fa-shopping-cart text-xs mr-2"></i>
-        Application
+        {{__('My Application')}}
       </a>
       <!-- end link -->
 
+      
+
       <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
+
+
+      <!-- link -->
+      {{--  --}}
+      <a href="{{route('admin.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+        {{__('All Application')}}
+      </a>
+      <!-- end link -->
 
       <!-- link -->
       <a href="./email.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
@@ -53,8 +64,17 @@
       </a>
       <!-- end link -->
 
-      
-      
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">User/Setting</p>
+
+      @role('Super-Admin|Admin')
+      <!-- link -->
+      {{--  --}}
+      <a href="{{route('user.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+        {{__('User Management')}}
+      </a>
+      <!-- end link -->
+      @endrole
       
 
     </div>

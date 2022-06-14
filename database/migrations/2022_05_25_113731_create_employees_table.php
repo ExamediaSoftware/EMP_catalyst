@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('application_id')->unsigned()->nullable();
             $table->foreign('application_id')->references('id')->on('applications');
 
-            $table->integer('emp_type');
+            $table->string('emp_type', 20);
             $table->integer('emp_total_no');
 
 

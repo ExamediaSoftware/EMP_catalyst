@@ -22,7 +22,7 @@ return new class extends Migration
  
              $table->string('media_path',200);
              $table->string('media_name',200);
-             $table->string('media_type',50);
+             $table->string('media_for',50);
 
 
             $table->timestamps();

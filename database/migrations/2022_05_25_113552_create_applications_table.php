@@ -23,9 +23,9 @@ return new class extends Migration
             $table->text('company_name')->nullable();
             $table->string('business_reg_no')->nullable();
             $table->string('business_reg_year')->nullable();
-            $table->integer('company_type')->nullable();
-            $table->integer('sector_type')->nullable();
-            $table->string('business_desc',255)->nullable();
+            $table->string('company_type',20)->nullable();
+            $table->string('sector_type',20)->nullable();
+            $table->text('business_desc')->nullable();
             $table->string('address_line1',255)->nullable();
             $table->string('address_line2',255)->nullable();
             $table->string('postcode',255)->nullable();
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('state',255)->nullable();
             $table->integer('office_number')->nullable();
             $table->integer('fax_number')->nullable();
-            $table->integer('acknowledgement')->nullable();
+            $table->string('acknowledgement',10)->nullable();
 
             //FK on USERS
             $table->bigInteger('created_by')->unsigned()->nullable();

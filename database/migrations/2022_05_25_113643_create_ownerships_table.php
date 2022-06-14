@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('shareholder_race',50);
             $table->string('shareholder_religion',50);
             $table->string('shareholder_gender',50);
-            $table->integer('shareholder_age');
+            $table->string('shareholder_age',10);
+            $table->integer('shareholder_no');
 
 
             $table->timestamps();

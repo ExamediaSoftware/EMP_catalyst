@@ -1,17 +1,22 @@
 {
     "Welcome to our website": "Selamat Datang ke website kami",
-    "Name" : "Nama",
+    "Name": "Nama",
     "Email": "Emel",
     "Password": "Kata laluan",
     "Confirm Password": "Kata laluan (kepastian)",
-    "Remember me" : "Ingat saya",
-    "Forgot your password?" : "Lupa kata laluan?",
-    "Log in" : "Log masuk",
-    "Profile" : "Profil",
-    "Log Out" : "Log Keluar",
-    "Register" : "Daftar",
-    "Already registered?" : "Sudah berdaftar?",
+    "Remember me": "Ingat saya",
+    "Forgot your password?": "Lupa kata laluan?",
+    "Log in": "Log masuk",
+    "Profile": "Profil",
+    "Log Out": "Log Keluar",
+    "Register": "Daftar",
+    "Already registered?": "Sudah berdaftar?",
     "auth.failed": "Salah tu password",
-    "Whoops! Something went wrong.": "Terdapat kesalahan semasa login"
-}
+    "Whoops! Something went wrong.": "Terdapat kesalahan semasa login",
+    "Company name": "Nama syarikat",
+    "Submission date": "Tarikh hantar",
+    "Create New Application": "Permohonan Baru",
+    "Dashboard": "Paparan Utama",
+    "Application": "Permohonan"
 
+}

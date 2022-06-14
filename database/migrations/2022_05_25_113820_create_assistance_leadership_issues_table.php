@@ -20,7 +20,7 @@ return new class extends Migration
              $table->bigInteger('application_id')->unsigned()->nullable();
              $table->foreign('application_id')->references('id')->on('applications');
  
-             $table->integer('issue');
+             $table->string('issue', 20);
 
             $table->timestamps();
         });

@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VerificationEmailController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\UserController;
+use App\Models\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -56,36 +60,35 @@ Route::get('/language/{locale}', function ($locale) {
     return redirect()->back();
 });
 
-Route::get('/application', function () {
-    return view('pages.application');
-})->name('application')->middleware(['auth']);
+// Route::get('/listapplication', function () {
+//     return view('pages.list-application');
+// })->name('list-application')->middleware(['auth']);
 
-// Route::group(
-//     ['middleware' => ['auth', 'role:Super Admin|Admin|Staf|Tenant|Owner']],
-//     function () {
-//         // uses 'auth' middleware plus all middleware from $middlewareGroups['role']
-//         Route::resource('profile', App\Http\Controllers\ProfileController::class);
-//         Route::resource('house', App\Http\Controllers\HouseController::class);
-//         Route::resource('houseimage', App\Http\Controllers\HouseImageController::class);
-//         Route::resource('houseowner_bankaccount', App\Http\Controllers\HouseOwnerBankAccountController::class);
-//         Route::resource('housedoc', App\Http\Controllers\HouseDocController::class);
-//         Route::resource(
-//             'houseagreement',
-//             App\Http\Controllers\HouseAgreementController::class
-//         );
-//         Route::resource('houseagreementlinks', App\Http\Controllers\HouseAgreementLinkController::class);
-//         Route::resource('housemedia', App\Http\Controllers\HouseMediaController::class);
-//         Route::resource('housetenant', App\Http\Controllers\HouseTenantController::class);
-//         Route::resource('houseutility', App\Http\Controllers\HouseUtilityController::class);
-//         Route::resource('houseutilityinfo', App\Http\Controllers\HouseUtilityInfoController::class);
-//         Route::resource('housetax', App\Http\Controllers\HouseTaxController::class);
-//         Route::resource('housecost', App\Http\Controllers\HouseCostController::class);
-//         Route::resource('houseinvoice', App\Http\Controllers\HouseInvoiceController::class);
-//         Route::resource('housereceipt', App\Http\Controllers\HouseReceiptController::class);
+Route::get('/listapplication', [ApplicationController::class, 'index'])->name('list-application.index')->middleware(['auth']);
 
-//         Route::get(
-//             'user/tenant',
-//             'App\Http\Controllers\UserController@index_tenant'
-//         )->middleware('auth')->name('usertenant');
-//     }
-// );
+// Route::get('/application', function () {
+
+    
+// })->name('application')->middleware(['auth']);
+
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        // uses 'auth' middleware plus all middleware from $middlewareGroups['role']
+        Route::resource('application', ApplicationController::class);
+        
+        
+    }
+);
+
+Route::group(
+    ['middleware' => ['auth','role:Super-Admin|Admin']],
+    function () {
+        // uses 'auth' middleware plus all middleware from $middlewareGroups['role']
+        
+        Route::resource('user', UserController::class);
+        Route::resource('admin', AdminController::class);
+        // Route::get('/admin/review', [AdminController::class, 'edit'])->name('reviewapplication');
+        
+    }
+);
