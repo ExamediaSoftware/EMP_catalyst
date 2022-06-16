@@ -24,7 +24,7 @@
 
         <!-- modal_reviewed_review -->
         <div id="modal_reviewed_review" class="fixed inset-0 z-50 hidden h-screen w-full px-4"
-            style="background-color:rgba(30, 30, 30, 0.601)">
+            style="background-color:rgba(30, 30, 30, 0.801)">
             <div class="mt-20 relative top-40 mx-auto max-w-md rounded-md bg-white shadow-lg">
 
                 <div class="max-h-48 p-4">

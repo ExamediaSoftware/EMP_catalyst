@@ -22,22 +22,23 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div>
-                            <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">Perniagaan Hassan & Keluarga</div>
-                            <div class="mx-3 mb-3 px-2 text-sm text-black">Love and gratitude to both The Prime
-                                Minister, The Honorable Mia Amor Mottley and our President, Her Excellency The Most
-                                Honorable Dame Sandra Mason for trusting me with this honor!</div>
+                            <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">{{$application->company_name}}</div>
+                            <div class="mx-3 mb-3 px-2 text-sm text-black">
+                                {{-- {{$output = str_replace(',', ', \n', $application->address) }} --}}
+                                {!! preg_replace("/:/", ",<br/>", ($application->address)) !!}
+                            </div>
                         </div>
-
+                        
                         <div>
-                            <div class="mx-3 mb-2 px-2 text-2xl text-black">KJ-2022619</div>
-                            <div class="mx-3 mb-2 px-2 text-black">Type: Enterprise</div>
-                            <div class="mx-3 mb-2 px-2 text-black">Sector: Manufacturing</div>
+                            <div class="mx-3 mb-2 px-2 text-2xl text-black">{{$application->business_reg_no}}</div>
+                            <div class="mx-3 mb-2 px-2 text-black">Type: {{$application->company_type_name}}</div>
+                            <div class="mx-3 mb-2 px-2 text-black">Sector: {{$application->sector_type_name}}</div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="mx-3 mb-6 px-2 text-sm text-black">O: 03-5512500</div>
-                        <div class="mx-3 mb-6 ml-2 px-2 text-left text-sm text-black">F: 03-5512500</div>
+                        <div class="mx-3 mb-6 px-2 text-sm text-black">O: {{$application->office_number}}</div>
+                        <div class="mx-3 mb-6 ml-2 px-2 text-left text-sm text-black">F: {{$application->fax_number}}</div>
                     </div>
                 </div>
                 <!-- END of Genreal ROW -->
@@ -117,39 +118,58 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="grid grid-cols-3 md:grid-cols-3">
                         <div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">Represnetative</div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">Ammar</div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">+60 1234567890</div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">ammar@gmail.com</div>
+                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black underline">Representative 1</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[0]->rep_name}}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[0]->rep_email}}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[0]->rep_phone}}</div>
                         </div>
 
                         <div class="border-gray-400 lg:border-x-4">
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">Bumiputera Owenership</div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">Akmal</div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">+60 1987651234</div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black">akmal@gmail.com</div>
+                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black underline">Representative 2</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[1]->rep_name}}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[1]->rep_email}}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[1]->rep_phone}}</div>
                         </div>
 
                         <div>
                             <div>
-                                <div class="grid grid-cols-2 divide-x">
-                                    <div class="mx-3 mb-2 px-2 font-bold text-black">Permanent</div>
-                                    <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">6</div>
-                                </div>
-                                <div class="grid grid-cols-2 divide-x">
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach ($application->employee as $emp)
+                                    @php $n = $emp->emp_total_no; $total = $total+$n; @endphp
+                                    
+                                    
+                                    <div class="grid grid-cols-2 divide-x">
+                                        <div class="mx-2 mb-2 px-1 font-bold text-black">{{$emp->emp_type}}</div>
+                                        <div class="ml-2 mr-8 mb-2 px-3 text-right font-bold text-black">{{$n}}</div>
+                                    </div>
+                                    
+                                    {{-- @if ($emp->emp_type == 'Part-time')
+                                    <div class="grid grid-cols-2 divide-x">
+                                        <div class="mx-3 mb-2 px-2 font-bold text-black">Part-time</div>
+                                        <div class="mx-3 mb-2 px-2 font-bold text-black">{{$n}}</div>
+                                    </div>
+                                    @endif --}}
+                                @endforeach
+                                {{-- <div class="grid grid-cols-2 divide-x">
+                                    <div class="mx-3 mb-2 px-2 font-bold text-black">Full-time</div>
+                                    <div class="mx-3 mb-2 px-2 font-bold text-black">{{$application->employee->}}</div>
+                                </div> --}}
+                                {{-- <div class="grid grid-cols-2 divide-x">
                                     <div class="mx-3 mb-2 px-2 font-bold text-black">Contract</div>
-                                    <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">6</div>
-                                </div>
-                                <div class="grid grid-cols-2 divide-x">
+                                    <div class="mx-3 mb-2 px-2 font-bold text-black"></div>
+                                </div> --}}
+                                {{-- <div class="grid grid-cols-2 divide-x">
                                     <div class="mx-3 mb-2 px-2 font-bold text-black">Part-time</div>
-                                    <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">6</div>
-                                </div>
+                                    <div class="mx-3 mb-2 px-2 font-bold text-black"></div>
+                                </div> --}}
                                 <div class="border-center mx-8 border-b-2 border-gray-400"></div>
                                 <div class="grid grid-cols-2 divide-x">
-                                    <div class="mx-3 mb-2 px-2 font-bold text-black">TOTAL</div>
-                                    <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">6</div>
+                                    <div class="mx-2 mb-2 px-1 font-bold text-black">TOTAL</div>
+                                    <div class="ml-2 mr-8 mb-2 px-3 text-right font-bold text-black">{{$total}}</div>
                                 </div>
                             </div>
                         </div>
@@ -165,20 +185,27 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="grid sm:grid-cols-1 grid-cols-1">
                         <div>
                             <div class="grid grid-flow-col grid-rows-2">
                                 <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">1</div>
-                                <div class="col-span-2 font-bold">Area of Asisstance Needed (Primary)</div>
-                                <div class="col-span-2 row-span-1">Financial Advisory & Taxation</div>
+                                <div class="font-bold">Primary</div>
+                                <div class="">{{$bus_issue[0]->business_issue_name}}</div>
                             </div>
                         </div>
 
                         <div>
                             <div class="grid grid-flow-col grid-rows-2">
                                 <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">2</div>
-                                <div class="col-span-2 font-bold">Area of Asisstance Needed (Secondary)</div>
-                                <div class="col-span-2 row-span-1">Corprate Gevernance</div>
+                                <div class="col-span-2 font-bold">Secondary</div>
+                                <div class="col-span-2 row-span-1">{{$bus_issue[1]->business_issue_name}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="grid grid-flow-col grid-rows-2">
+                                <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">2</div>
+                                <div class="col-span-2 font-bold">Tertiary</div>
+                                <div class="col-span-2 row-span-1">{{$bus_issue[2]->business_issue_name}}</div>
                             </div>
                         </div>
                     </div>

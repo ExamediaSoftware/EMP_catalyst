@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('application_id')->references('id')->on('applications');
 
             $table->string('status_id',10);
-            
+            $table->integer('no_person_scoredvideo')->default('0');
             
             // $table->date('created_at');
             // $table->string('created_by',255);

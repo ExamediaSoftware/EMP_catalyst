@@ -23,6 +23,30 @@ class Application extends Model
 
     ];
 
+    protected $appends = ['address', 'state_name'];
+
+    public function getAddressAttribute()
+    {
+        $address = $this->address_line1 . ', ' . $this->address_line2 . ':' . $this->postcode . ': '
+            . $this->city . ', ' . $this->state_name;
+        return $address;
+    }
+
+    public function getStateNameAttribute()
+    {
+        return Parameter::where('type_id','=',$this->state)->first()->type_name;
+    }
+
+    public function getCompanyTypeNameAttribute()
+    {
+        return Parameter::where('type_id','=',$this->company_type)->first()->type_name;
+    }
+
+    public function getSectorTypeNameAttribute()
+    {
+        return Parameter::where('type_id','=',$this->sector_type)->first()->type_name;
+    }
+
     public function representative()
     {
         return $this->hasMany(Representative::class);

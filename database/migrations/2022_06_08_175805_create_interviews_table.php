@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('application_id')->references('id')->on('applications');
             $table->integer('application_status_id');
             $table->date('interview_date');
-            $table->double('interview_score',3,2);
+            $table->double('interview_score',4,2)->nullable();
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
             <div class="mx-2 my-6 font-bold text-black">Status</div>
 
 
-            <div class="mx-3 mb-2 px-2 font-bold text-gray-600">Rejected - Video </div>
+            <div class="mx-3 mb-2 px-2 font-bold text-gray-600">Rejected (Before Interview) </div>
             <div class="font-bla mx-3 mb-2 px-2 text-gray-600">This Application has been rejected before being interview</div>
         </div>
     </div>

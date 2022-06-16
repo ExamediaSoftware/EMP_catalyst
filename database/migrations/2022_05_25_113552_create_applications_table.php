@@ -34,6 +34,7 @@ return new class extends Migration
             $table->integer('office_number')->nullable();
             $table->integer('fax_number')->nullable();
             $table->string('acknowledgement',10)->nullable();
+            
 
             //FK on USERS
             $table->bigInteger('created_by')->unsigned()->nullable();

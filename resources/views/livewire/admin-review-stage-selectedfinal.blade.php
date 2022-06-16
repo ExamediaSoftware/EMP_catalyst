@@ -15,17 +15,13 @@
                         class="rounded border border-blue-700 bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
                         onclick="openModalVerify('modal_verify')">VERIFY</button>
                     <!-- modal_reviewed_review -->
-                    <div id="modal_verify"
-                        class="fixed inset-0 z-50 hidden h-full w-full overflow-y-auto bg-gray-200 bg-opacity-10 px-4">
-                        <div class="relative top-40 mx-auto max-w-md rounded-md bg-white shadow-lg">
-                            <!-- Modal header -->
-                            <!-- <div class="flex items-center justify-between rounded-t-md bg-blue-500 px-4 py-2 text-xl text-white">
-          <h3>Modal header</h3>
-          <button onclick="closeModal()">x</button>
-        </div>
-        Modal body -->
+                    <div id="modal_verify" wire:ignore.self
+                        class="fixed inset-0 z-50 hidden h-full w-full overflow-y-auto bg-gray-200 bg-opacity-10 px-4"
+                        style="background-color:rgba(30, 30, 30, 0.801)">
+                        <div class="mt-20 relative top-40 mx-auto max-w-md rounded-md bg-white shadow-lg">
+                            
                             <div class="max-h-screen p-4 ">
-                                <p>VERIFY? You are about to reject this application. Are you sure you want
+                                <p>VERIFY? You are about to verify this application. Are you sure you want
                                     to proceed?</p>
                             </div>
                             <!-- Modal footer border-t border-t-gray-500-->

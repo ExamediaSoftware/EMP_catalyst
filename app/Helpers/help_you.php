@@ -57,7 +57,21 @@ if (!function_exists('Get_ComponentStage')) {
         } elseif ($application->currentStatus->status_id == 'Resubmit') {
             $statusComponent = 'admin-review-stage1';
         } elseif ($application->currentStatus->status_id == 'Scored - Incomplete') {
-            $statusComponent = 'admin-review-stage1';
+            $statusComponent = 'admin-review-stage2';
+        }elseif ($application->currentStatus->status_id == 'Scored - Video') {
+            $statusComponent = 'admin-review-stage-scoredvideo';
+        }elseif ($application->currentStatus->status_id == 'Selected - Interview') {
+            $statusComponent = 'admin-review-stage-selectedinterview';
+        }elseif ($application->currentStatus->status_id == 'Rejected - Interview') {
+            $statusComponent = 'admin-review-stage-rejectbeforeinterview';
+        }elseif ($application->currentStatus->status_id == 'Scored - Interview') {
+            $statusComponent = 'admin-review-stage-scoredinterview';
+        }elseif ($application->currentStatus->status_id == 'Approved') {
+            $statusComponent = 'admin-review-stage-selectedfinal';
+        }elseif ($application->currentStatus->status_id == 'Rejected') {
+            $statusComponent = 'admin-review-stage-rejectafterscoreinterview';
+        }elseif ($application->currentStatus->status_id == 'Verified') {
+            $statusComponent = 'admin-review-stage-successful';
         }
 
         // $statusComponent = 'admin-review-stage1';

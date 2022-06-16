@@ -15,10 +15,12 @@ class AdminReviewApplication extends Component
 
     public $statusComponent;
 
+    public $bus_issue = [];
+
     protected $listeners = [
         'submitreview', 'submitquery_main', 'submitvideoscore_main', 'selectforinterview_main',
-        'rejectbeforeinterview_main',
-        'scoreinterview_main', 'successfullcandidate_main', 'verify_main'
+        'rejectbeforeinterview_main', 'scoreinterview_main', 'successfullcandidate_main', 
+        'rejectafterscoreinterview_main','verify_main'
     ];
 
     public function mount($applicationid)
@@ -36,6 +38,8 @@ class AdminReviewApplication extends Component
         // $this->statusComponent = 'admin-review-stage1';
 
         $this->statusComponent = Get_ComponentStage($this->application->id);
+        $this->bus_issue = $this->application->business_issue->sortBy('issue_priority');
+        // dd($bus_issue[0]->issue);
     }
 
     public function render()
@@ -74,9 +78,10 @@ class AdminReviewApplication extends Component
     public function submitvideoscore_main()
     {
         $this->no++;
-        $this->statusComponent = 'admin-review-stage-scoredvideo';
+        // $this->statusComponent = 'admin-review-stage-scoredvideo';
+        $this->statusComponent = Get_ComponentStage($this->application->id);
 
-        $this->dispatchBrowserEvent('closeModalReview', ['message' => "Data updated"]);
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
     }
 
 
@@ -84,9 +89,10 @@ class AdminReviewApplication extends Component
     public function selectforinterview_main()
     {
         $this->no++;
-        $this->statusComponent = 'admin-review-stage-selectedinterview';
+        // $this->statusComponent = 'admin-review-stage-selectedinterview';
+        $this->statusComponent = Get_ComponentStage($this->application->id);
 
-        // $this->dispatchBrowserEvent('closeModalReview', ['message' => "Data updated"]);
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
     }
 
 
@@ -94,30 +100,42 @@ class AdminReviewApplication extends Component
     public function scoreinterview_main()
     {
         $this->no++;
-        $this->statusComponent = 'admin-review-stage-scoredinterview';
+        $this->statusComponent = Get_ComponentStage($this->application->id);
 
-        // $this->dispatchBrowserEvent('closeModalReview', ['message' => "Data updated"]);
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
     }
 
     public function successfullcandidate_main()
     {
         $this->no++;
-        $this->statusComponent = 'admin-review-stage-selectedfinal';
+        $this->statusComponent = Get_ComponentStage($this->application->id);
 
-        // $this->dispatchBrowserEvent('closeModalReview', ['message' => "Data updated"]);
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
     }
     public function verify_main()
     {
         $this->no++;
-        $this->statusComponent = 'admin-review-stage-successful';
+        $this->statusComponent = Get_ComponentStage($this->application->id);
 
-        // $this->dispatchBrowserEvent('closeModalReview', ['message' => "Data updated"]);
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
     }
     public function rejectbeforeinterview_main()
     {
         $this->no++;
-        $this->statusComponent = 'admin-review-stage-rejectbeforeinterview';
+        // $this->statusComponent = 'admin-review-stage-rejectbeforeinterview';
 
-        // $this->dispatchBrowserEvent('closeModalReview', ['message' => "Data updated"]);
+        $this->statusComponent = Get_ComponentStage($this->application->id);
+
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
+    }
+
+    public function rejectafterscoreinterview_main()
+    {
+        $this->no++;
+        // $this->statusComponent = 'admin-review-stage-rejectbeforeinterview';
+
+        $this->statusComponent = Get_ComponentStage($this->application->id);
+
+        $this->dispatchBrowserEvent('showModal', ['message' => 'Data updated']);
     }
 }

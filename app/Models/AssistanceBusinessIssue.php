@@ -16,4 +16,9 @@ class AssistanceBusinessIssue extends Model
         'issue_desc',
         
     ];
+
+    public function getBusinessIssueNameAttribute()
+    {
+        return Parameter::where('type_id','=',$this->issue)->first()->subtype_name;
+    }
 }
