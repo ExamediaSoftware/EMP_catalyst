@@ -144,7 +144,7 @@
                 <div class="col-span-4 sm:col-span-2">
                     <label for="shareholder_percentage"
                         class="block text-sm font-medium text-gray-700">Percentage</label>
-                    <input wire:model="shareholder_percentage.1" type="text" name="shareholder_percentage[]"
+                    <input wire:model="shareholder_percentage.1" type="text"
                         id="shareholder_percentage2" autocomplete="family-name"
                         class="mt-1 w-1/4 px-2  focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                     @error('shareholder_percentage.1')

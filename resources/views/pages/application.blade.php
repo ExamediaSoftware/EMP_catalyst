@@ -50,7 +50,7 @@
                         // $array_section = $application->sectionComment->section->toArray();
                         // print_r($array_section);
                         $array_section =[];
-                        if($application->currentStatus->status_id == 'Queried'){
+                        if($application->currentStatus != null && $application->currentStatus->status_id == 'Queried'){
                             foreach ($application->sectionComment as $key => $value) {
                                 $array_section [] = $value['section'];
                             }
@@ -294,6 +294,7 @@
         }
 
         window.addEventListener('showModal', event => {
+            console.log('here');
             var msg = event.detail.message;
             document.getElementById('message').innerHTML = msg;
             openModal('modal');

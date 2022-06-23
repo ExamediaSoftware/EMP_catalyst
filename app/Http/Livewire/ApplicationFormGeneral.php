@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Application;
 use App\Models\ApplicationStatus;
+use App\Models\FormChecklist;
 use App\Models\Representative;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class ApplicationFormGeneral extends Component
         $this->fax_number = $application->fax_number;
         // dd($application->representative);    
         if (count($application->representative) > 0) {
-            foreach($application->representative as $rep){
+            foreach ($application->representative as $rep) {
                 $this->rep_name[] = $rep['rep_name'];
                 $this->rep_position[] = $rep['rep_position'];
                 $this->rep_age[] = $rep['rep_age'];
@@ -159,6 +160,29 @@ class ApplicationFormGeneral extends Component
     public function update()
     {
         // dd($this);
+        $c = FormChecklist::where([
+            ['tab_name', '=', 'General'],
+            ['tab_status', '=', 1]
+        ])->count();
+
+        // dd($c);
+
+        if ($c < 2) {
+            // dd('here');
+        } else {
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'General',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'General',
+                    'tab_status' => 0,
+                ]
+            );
+        }
+
         $validatedData = $this->validate(
             [
                 'company_name' => 'required',
@@ -222,6 +246,8 @@ class ApplicationFormGeneral extends Component
             ]
         );
 
+        // dd($validatedData);
+
         if ($this->application->id) {
 
             $this->application->update([
@@ -244,9 +270,9 @@ class ApplicationFormGeneral extends Component
             // $representative = Representative::where('application_id', $this->application->id)
             //     ->get();
             foreach ($this->rep_position as $key => $file) {
-                if($key == 0){
+                if ($key == 0) {
                     $rep_as = 'founder';
-                }else{
+                } else {
                     $rep_as = 'co-founder';
                 }
                 $rep1 = Representative::updateOrCreate(
@@ -271,8 +297,18 @@ class ApplicationFormGeneral extends Component
             'status_id' => 'AS01',
             'created_by' => Auth::user()->id,
         ]);
+
+        $checklist = FormChecklist::updateOrCreate(
+            [
+                'application_id' =>  $this->application->id,
+                'tab_name' => 'General',
+            ],
+            [
+                'application_id' => $this->application->id,
+                'tab_name' => 'General',
+                'tab_status' => 1,
+            ]
+        );
         $this->dispatchBrowserEvent('showModal', ['message' => "Data updated"]);
     }
-
-    
 }

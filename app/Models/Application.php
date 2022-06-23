@@ -34,7 +34,11 @@ class Application extends Model
 
     public function getStateNameAttribute()
     {
-        return Parameter::where('type_id','=',$this->state)->first()->type_name;
+        // dd($this->state);
+        if($this->state != null){
+            return Parameter::where('type_id','=',$this->state)->first()->type_name;
+        }
+
     }
 
     public function getCompanyTypeNameAttribute()

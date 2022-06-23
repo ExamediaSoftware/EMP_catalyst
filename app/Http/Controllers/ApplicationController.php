@@ -34,12 +34,21 @@ class ApplicationController extends Controller
 
             ]
         );
+
+        $statusInsert = ApplicationStatus::create([
+            'application_id' => $application->id,
+            'status_id' => 'AS01',
+            'created_by' => Auth::user()->id,
+        ]);
+
+       
         return redirect()->route('application.edit', compact('application'));
         // return view('pages.application', compact('application'));
     }
 
     public function edit(Application $application)
     {
+        // dd($application);
         return view('pages.application', compact('application'));
     }
 

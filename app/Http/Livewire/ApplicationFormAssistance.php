@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\ApplicationStatus;
 use App\Models\AssistanceBusinessIssue;
 use App\Models\AssistanceLeadershipIssue;
+use App\Models\FormChecklist;
 use App\Models\Parameter;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -71,8 +72,30 @@ class ApplicationFormAssistance extends Component
 
     public function update_issue()
     {
-        // dd($tπhis);
+        // dd($this);
         // dd($this->shareholder_percentage);
+        $c = FormChecklist::where([
+            ['tab_name', '=', 'Assistance'],
+            ['tab_status', '=', 1]
+        ])->count();
+
+        // dd($c);
+
+        if ($c < 2) {
+            // dd('here');
+        } else {
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'Assistance',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'Assistance',
+                    'tab_status' => 0,
+                ]
+            );
+        }
 
         $validatedData = $this->validate(
             [
@@ -128,11 +151,13 @@ class ApplicationFormAssistance extends Component
 
         foreach ($this->issue as $key => $file) {
 
-            if (isEmpty($this->issue_desc)) {
+            if (count($this->issue_desc) == 0) {
                 $v = '';
             } else {
                 $v = $this->issue_desc[$key];
             }
+
+            // dd($v);
             $issue_business = AssistanceBusinessIssue::updateOrCreate(
                 [
                     'application_id' =>  $this->application->id,
@@ -148,18 +173,18 @@ class ApplicationFormAssistance extends Component
         }
 
         AssistanceLeadershipIssue::where('application_id', $this->application->id)
-        ->delete();
+            ->delete();
         // dd();
         foreach ($this->checkbox as $key => $file) {
             // dd($this->checkbox);
-            if (!count($this->checkbox)>0 ) {
+            if (!count($this->checkbox) > 0) {
                 $v = '';
 
                 // dd('empty');
                 break;
             } else {
                 $v = $this->checkbox[$key];
-                if($v == false){
+                if ($v == false) {
                     continue;
                 }
             }
@@ -181,6 +206,18 @@ class ApplicationFormAssistance extends Component
             'status_id' => 'AS01',
             'created_by' => Auth::user()->id,
         ]);
+
+        $checklist = FormChecklist::updateOrCreate(
+            [
+                'application_id' =>  $this->application->id,
+                'tab_name' => 'Assistance',
+            ],
+            [
+                'application_id' => $this->application->id,
+                'tab_name' => 'Assistance',
+                'tab_status' => 1,
+            ]
+        );
 
         $this->dispatchBrowserEvent('showModal', ['message' => "Data updated"]);
     }

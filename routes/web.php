@@ -1,10 +1,13 @@
 <?php
 
+use App\Events\NotifyAdmin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\UserController;
 use App\Models\Application;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -89,6 +92,21 @@ Route::group(
         Route::resource('user', UserController::class);
         Route::resource('admin', AdminController::class);
         // Route::get('/admin/review', [AdminController::class, 'edit'])->name('reviewapplication');
-        
+        Route::get('/notifications', function(){
+            
+            return view('pages.admin-list-application');
+        })->name('notification');
     }
 );
+
+
+
+Route::get('/event1', function(){
+    
+    Notification::create([
+        'user_id' => 1,
+        'message' => 'Hai',
+        'isRead' => 0,
+    ]);
+    return event(new NotifyAdmin('Hai'));
+});

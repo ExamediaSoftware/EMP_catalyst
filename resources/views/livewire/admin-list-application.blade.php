@@ -1,6 +1,10 @@
 <div>
     {{-- Stop trying to control. --}}
-    
+    <div class="flex flex-row-reverse mb-4 text-sm">
+        
+        <button onclick="openModal('modal_notify_applicant')" type="submit" class="btn-shadow">{{ __('Notify Successfull Applicant') }}</button>
+       
+    </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -54,5 +58,24 @@
             </tbody>
         </table>
     </div>
+    {{-- Modal confirm to notify successfull applicant --}}
+    <div id="modal_notify_applicant" class="fixed inset-0 z-50 hidden h-screen w-full px-4"
+            style="background-color:rgba(30, 30, 30, 0.801)">
+            <div class="mt-20 relative top-40 mx-auto max-w-md rounded-md bg-white shadow-lg">
 
+                <div class="max-h-48 p-4">
+                    <p>Are you sure to notify successfull applicant via email and system?</p>
+                </div>
+                <!-- Modal footer border-t border-t-gray-500-->
+                <div class="flex items-center justify-end space-x-4 gap-2 px-4 py-2">
+                    <button
+                        class="rounded-md bg-gray-300 px-4 py-2 text-black hover:text-white transition hover:bg-gray-700"
+                        onclick="closeModal('modal_notify_applicant')">CANCEL</button>
+                    {{-- <button class="rounded-md bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-700"
+                        onclick="test()">YES</button> --}}
+                    <button class="rounded-md bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-700"
+                        wire:click="$emit('sendnotification_to_successfull')">YES</button>
+                </div>
+            </div>
+        </div>
 </div>

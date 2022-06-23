@@ -51,6 +51,8 @@ class AdminReviewStage1 extends Component
             'created_by' => Auth::user()->id,
         ]);
 
+        f_notifyApplicant($this->application->id, 'AS03');
+
         $tablestatusID = $statusInsert->id;
         // dd($tablestatusID);
         $section = ['General', 'Ownership', 'Financial', 'Employess', 'Assistance', 'Document', 'Video'];

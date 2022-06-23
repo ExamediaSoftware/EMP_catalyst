@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ApplicationStatus;
+use App\Models\FormChecklist;
 use App\Models\Media;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -33,6 +34,27 @@ class ApplicationFormVideo extends Component
 
     public function saveVideo()
     {
+        $count = Media::where([
+            ['application_id', '=', $this->application->id],
+            ['media_for', '=', 'interview video']
+        ])->count();
+        // dd($count);
+
+        if ($count != 1) {
+
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'Video',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'Video',
+                    'tab_status' => 0,
+                ]
+            );
+        }
+
         $rule_a1 = Rule::requiredIf(function () {
             return !isset($this->video_path);
         });
@@ -94,11 +116,23 @@ class ApplicationFormVideo extends Component
                 'status_id' => 'AS01',
                 'created_by' => Auth::user()->id,
             ]);
+
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'Video',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'Video',
+                    'tab_status' => 1,
+                ]
+            );
         } else {
             $new_result = 'Video failed to be uploaded';
         }
 
-        
+
 
 
         $this->dispatchBrowserEvent('showModal', ['message' => $new_result]);

@@ -15,6 +15,9 @@
                         @if (Request::is('admin/*'))
                             @livewire('admin-review-application', ['applicationid' => $id])
                         @endif
+                        @if (Request::is('notifications'))
+                            @livewire('notifications')
+                        @endif
 
                     </div>
                 </div>
@@ -24,5 +27,15 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+        function openModal(modalId) {
+            modal = document.getElementById(modalId)
+            modal.classList.remove('hidden')
+        }
+
+        function closeModal(modalId) {
+            modal = document.getElementById(modalId)
+            modal.classList.add('hidden')
+        }
+    </script>
 @endsection

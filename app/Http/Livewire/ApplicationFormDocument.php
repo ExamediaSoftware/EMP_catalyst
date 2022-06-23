@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Application;
 use App\Models\ApplicationStatus;
+use App\Models\FormChecklist;
 use App\Models\Media;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -17,14 +18,14 @@ class ApplicationFormDocument extends Component
 
     public $application;
     public $business_reg_cert;
-    public $business_reg_cert_path;
     public $owner_ic_file;
-    public $owner_ic_file_path;
     public $fin_state_2020;
-    public $fin_state_2020_path;
     public $fin_state_2021;
-    public $fin_state_2021_path;
     public $epf_or_payslip;
+    public $business_reg_cert_path;
+    public $owner_ic_file_path;
+    public $fin_state_2020_path;
+    public $fin_state_2021_path;
     public $epf_or_payslip_path;
 
     public function mount($application)
@@ -64,6 +65,27 @@ class ApplicationFormDocument extends Component
     public function saveFiles()
     {
         // dd(($this));
+        $count = Media::where([
+            ['application_id', '=', $this->application->id],
+            ['media_for', '!=', 'interview video']
+        ])->count();
+        // dd($count);
+
+        if ($count != 5) {
+
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'Document',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'Document',
+                    'tab_status' => 0,
+                ]
+            );
+        }
+
         $rule_a1 = Rule::requiredIf(function () {
             return !isset($this->business_reg_cert_path);
         });
@@ -339,6 +361,18 @@ class ApplicationFormDocument extends Component
             'status_id' => 'AS01',
             'created_by' => Auth::user()->id,
         ]);
+
+        $checklist = FormChecklist::updateOrCreate(
+            [
+                'application_id' =>  $this->application->id,
+                'tab_name' => 'Document',
+            ],
+            [
+                'application_id' => $this->application->id,
+                'tab_name' => 'Document',
+                'tab_status' => 1,
+            ]
+        );
 
 
         $new_result = $ss . "<br>" . $rr;

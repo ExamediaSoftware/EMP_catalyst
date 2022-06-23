@@ -35,6 +35,8 @@ class AdminReviewStageScoredinterview extends Component
             'created_by' => Auth::user()->id,
         ]);
 
+        f_notifyAdmin($this->application->id, 'AS10');
+
         $this->emitUp('successfullcandidate_main');
     }
     public function rejectafterscoreinterview()

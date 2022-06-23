@@ -64,6 +64,8 @@ class AdminReviewStageScoredvideo extends Component
 
         ]);
 
+        f_notifyApplicant($this->application->id, 'AS07', $this->date_interview);
+
         $this->emit('selectforinterview_main');
     }
 

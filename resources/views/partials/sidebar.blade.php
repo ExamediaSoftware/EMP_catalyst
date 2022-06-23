@@ -44,7 +44,7 @@
       <!-- end link -->
 
       <!-- link -->
-      <a href="./email.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+      <a href="{{route('notification')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
         <i class="fad fa-envelope-open-text text-xs mr-2"></i>
         Notifications
       </a>
@@ -79,6 +79,7 @@
 
     </div>
     <!-- end sidebar content -->
+    
 
   </div>
   <!-- end sidbar -->

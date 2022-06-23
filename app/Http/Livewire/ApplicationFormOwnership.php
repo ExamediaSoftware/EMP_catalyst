@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ApplicationStatus;
+use App\Models\FormChecklist;
 use App\Models\Ownership;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -27,7 +28,7 @@ class ApplicationFormOwnership extends Component
         $no_of_current_ownership = count($application->ownership);
         $this->ownership_count = $no_of_current_ownership;
 
-        for($i=3;$i<=$no_of_current_ownership;$i++){
+        for ($i = 3; $i <= $no_of_current_ownership; $i++) {
             array_push($this->inputs, $i);
         }
 
@@ -60,16 +61,40 @@ class ApplicationFormOwnership extends Component
         // shareholder_religion
         // shareholder_gender
         // shareholder_age
+        $c = FormChecklist::where([
+            ['tab_name', '=', 'Ownership'],
+            ['tab_status', '=', 1]
+        ])->count();
+
+        // dd($c);
+
+        if ($c < 2) {
+            // dd('here');
+        } else {
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'Ownership',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'Ownership',
+                    'tab_status' => 0,
+                ]
+            );
+        }
+
+
 
 
         $validatedData = $this->validate(
             [
                 'shareholder_name.*' => 'required|string',
                 'shareholder_percentage.*' => 'required|numeric',
-                'shareholder_race.*' => ['required','string', Rule::notIn(['Please Choose'])],
-                'shareholder_religion.*' => ['required','string', Rule::notIn(['Please Choose'])],
-                'shareholder_gender.*' => ['required','string', Rule::notIn(['Please Choose'])],
-                'shareholder_age.*' => ['required','string', Rule::notIn(['Please Choose'])],
+                'shareholder_race.*' => ['required', 'string', Rule::notIn(['Please Choose'])],
+                'shareholder_religion.*' => ['required', 'string', Rule::notIn(['Please Choose'])],
+                'shareholder_gender.*' => ['required', 'string', Rule::notIn(['Please Choose'])],
+                'shareholder_age.*' => ['required', 'string', Rule::notIn(['Please Choose'])],
                 // 'shareholder_name' => 'required|numeric',
                 // 'shareholder_percentage' => 'required|numeric',
                 // 'shareholder_race' => 'required',
@@ -91,12 +116,12 @@ class ApplicationFormOwnership extends Component
                 'shareholder_name.*.numeric' => 'Please insert numeric value in :attribute',
                 'shareholder_percentage.*.required' => 'Please fill :attribute',
                 'shareholder_percentage.*.numeric' => 'Please insert numeric value in :attribute',
-                'shareholder_race.*.required','shareholder_race.*.not_in' => 'Please fill :attribute',
-                'shareholder_religion.*.required','shareholder_religion.*.not_in' => 'Please fill :attribute',
+                'shareholder_race.*.required', 'shareholder_race.*.not_in' => 'Please fill :attribute',
+                'shareholder_religion.*.required', 'shareholder_religion.*.not_in' => 'Please fill :attribute',
                 'shareholder_religion.*.numeric' => 'Please insert numeric value in :attribute',
-                'shareholder_gender.*.required','shareholder_gender.*.not_in' => 'Please fill :attribute',
+                'shareholder_gender.*.required', 'shareholder_gender.*.not_in' => 'Please fill :attribute',
                 'shareholder_gender.*.numeric' => 'Please insert numeric value in :attribute',
-                'shareholder_age.*.required','shareholder_age.*.not_in' => 'Please fill :attribute',
+                'shareholder_age.*.required', 'shareholder_age.*.not_in' => 'Please fill :attribute',
                 'shareholder_age.*.numeric' => 'Please insert numeric value in :attribute',
 
 
@@ -137,6 +162,18 @@ class ApplicationFormOwnership extends Component
             'status_id' => 'AS01',
             'created_by' => Auth::user()->id,
         ]);
+
+        $checklist = FormChecklist::updateOrCreate(
+            [
+                'application_id' =>  $this->application->id,
+                'tab_name' => 'Ownership',
+            ],
+            [
+                'application_id' => $this->application->id,
+                'tab_name' => 'Ownership',
+                'tab_status' => 1,
+            ]
+        );
         $this->dispatchBrowserEvent('showModal', ['message' => "Data updated"]);
     }
 

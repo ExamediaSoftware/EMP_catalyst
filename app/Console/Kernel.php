@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +17,19 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $interview_passed = DB::table('interviews')
+                ->whereRaw('DATEDIFF(interview_score,current_date) < 2 AND interview_score = NULL')
+                ->get();
+
+                foreach($interview_passed as $i){
+                    f_notifyAdmin($i->application_id, 'interviewed');
+                }
+
+                $interview_passed = DB::table('interviews')
+                ->whereRaw('DATEDIFF(interview_score,current_date) < 2 AND interview_score = NULL')
+                ->get();
+        })->daily();
     }
 
     /**
@@ -25,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

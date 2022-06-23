@@ -22,23 +22,26 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div>
-                            <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">{{$application->company_name}}</div>
+                            <div class="mx-3 mb-2 px-2 text-2xl font-bold text-black">{{ $application->company_name }}
+                            </div>
                             <div class="mx-3 mb-3 px-2 text-sm text-black">
                                 {{-- {{$output = str_replace(',', ', \n', $application->address) }} --}}
-                                {!! preg_replace("/:/", ",<br/>", ($application->address)) !!}
+                                {!! preg_replace('/:/', ',<br/>', $application->address) !!}
                             </div>
                         </div>
-                        
+
                         <div>
-                            <div class="mx-3 mb-2 px-2 text-2xl text-black">{{$application->business_reg_no}}</div>
-                            <div class="mx-3 mb-2 px-2 text-black">Type: {{$application->company_type_name}}</div>
-                            <div class="mx-3 mb-2 px-2 text-black">Sector: {{$application->sector_type_name}}</div>
+                            <div class="mx-3 mb-2 px-2 text-2xl text-black">{{ $application->business_reg_no }}</div>
+                            <div class="mx-3 mb-2 px-2 text-black">Type: {{ $application->company_type_name }}</div>
+                            <div class="mx-3 mb-2 px-2 text-black">Sector: {{ $application->sector_type_name }}</div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="mx-3 mb-6 px-2 text-sm text-black">O: {{$application->office_number}}</div>
-                        <div class="mx-3 mb-6 ml-2 px-2 text-left text-sm text-black">F: {{$application->fax_number}}</div>
+                        <div class="mx-3 mb-6 px-2 text-sm text-black">O: {{ $application->office_number }}</div>
+                        <div class="mx-3 mb-6 ml-2 px-2 text-left text-sm text-black">F:
+                            {{ $application->fax_number }}
+                        </div>
                     </div>
                 </div>
                 <!-- END of Genreal ROW -->
@@ -120,17 +123,25 @@
 
                     <div class="grid grid-cols-3 md:grid-cols-3">
                         <div>
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black underline">Representative 1</div>
-                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[0]->rep_name}}</div>
-                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[0]->rep_email}}</div>
-                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[0]->rep_phone}}</div>
+                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black underline">Representative 1
+                            </div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">
+                                {{ $application->representative[0]->rep_name }}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">
+                                {{ $application->representative[0]->rep_email }}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">
+                                {{ $application->representative[0]->rep_phone }}</div>
                         </div>
 
                         <div class="border-gray-400 lg:border-x-4">
-                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black underline">Representative 2</div>
-                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[1]->rep_name}}</div>
-                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[1]->rep_email}}</div>
-                            <div class="mx-3 mb-2 px-2 text-center text-black">{{$application->representative[1]->rep_phone}}</div>
+                            <div class="mx-3 mb-2 px-2 text-center font-bold text-black underline">Representative 2
+                            </div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">
+                                {{ $application->representative[1]->rep_name }}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">
+                                {{ $application->representative[1]->rep_email }}</div>
+                            <div class="mx-3 mb-2 px-2 text-center text-black">
+                                {{ $application->representative[1]->rep_phone }}</div>
                         </div>
 
                         <div>
@@ -139,14 +150,18 @@
                                     $total = 0;
                                 @endphp
                                 @foreach ($application->employee as $emp)
-                                    @php $n = $emp->emp_total_no; $total = $total+$n; @endphp
-                                    
-                                    
+                                    @php
+                                        $n = $emp->emp_total_no;
+                                        $total = $total + $n;
+                                    @endphp
+
+
                                     <div class="grid grid-cols-2 divide-x">
-                                        <div class="mx-2 mb-2 px-1 font-bold text-black">{{$emp->emp_type}}</div>
-                                        <div class="ml-2 mr-8 mb-2 px-3 text-right font-bold text-black">{{$n}}</div>
+                                        <div class="mx-2 mb-2 px-1 font-bold text-black">{{ $emp->emp_type }}</div>
+                                        <div class="ml-2 mr-8 mb-2 px-3 text-right font-bold text-black">
+                                            {{ $n }}</div>
                                     </div>
-                                    
+
                                     {{-- @if ($emp->emp_type == 'Part-time')
                                     <div class="grid grid-cols-2 divide-x">
                                         <div class="mx-3 mb-2 px-2 font-bold text-black">Part-time</div>
@@ -169,7 +184,8 @@
                                 <div class="border-center mx-8 border-b-2 border-gray-400"></div>
                                 <div class="grid grid-cols-2 divide-x">
                                     <div class="mx-2 mb-2 px-1 font-bold text-black">TOTAL</div>
-                                    <div class="ml-2 mr-8 mb-2 px-3 text-right font-bold text-black">{{$total}}</div>
+                                    <div class="ml-2 mr-8 mb-2 px-3 text-right font-bold text-black">
+                                        {{ $total }}</div>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +206,7 @@
                             <div class="grid grid-flow-col grid-rows-2">
                                 <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">1</div>
                                 <div class="font-bold">Primary</div>
-                                <div class="">{{$bus_issue[0]->business_issue_name}}</div>
+                                <div class="">{{ $bus_issue[0]->business_issue_name }}</div>
                             </div>
                         </div>
 
@@ -198,14 +214,14 @@
                             <div class="grid grid-flow-col grid-rows-2">
                                 <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">2</div>
                                 <div class="col-span-2 font-bold">Secondary</div>
-                                <div class="col-span-2 row-span-1">{{$bus_issue[1]->business_issue_name}}</div>
+                                <div class="col-span-2 row-span-1">{{ $bus_issue[1]->business_issue_name }}</div>
                             </div>
                         </div>
                         <div>
                             <div class="grid grid-flow-col grid-rows-2">
-                                <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">2</div>
+                                <div class="row-span-2 mr-2 text-right text-6xl font-extrabold">3</div>
                                 <div class="col-span-2 font-bold">Tertiary</div>
-                                <div class="col-span-2 row-span-1">{{$bus_issue[2]->business_issue_name}}</div>
+                                <div class="col-span-2 row-span-1">{{ $bus_issue[2]->business_issue_name }}</div>
                             </div>
                         </div>
                     </div>
@@ -217,6 +233,111 @@
                 </div>
                 <!-- END of Assistance ROW -->
 
+                <!-- START Assistance ROW -->
+                <div class="rounded shadow-lg border-2 border-gray-200 mx-2 my-4 p-2">
+                    <div class="mx-3 flex flex-row px-2 py-3">
+                        <div class="h-auto w-auto rounded-lg border-2 border-gray-600">
+                            <div class="mx-3 px-2 font-semibold text-gray-600">Assistance</div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <!-- problem 1 -->
+                        <div class="p-2">
+                            <div class="grid grid-flow-col grid-rows-3">
+                                <div class="row-span-1 m-2 self-center">
+                                    <div
+                                        class="float-left grid grid-flow-col grid-rows-2 rounded-full border-8 border-blue-500 pr-4">
+                                        <div
+                                            class="text-center row-span-2 m-2 h-10 w-10 self-center rounded-full bg-blue-500 text-3xl font-extrabold text-white">
+                                            1</div>
+                                        <div class="col-span-2 font-bold">Area of Asisstance Needed (Primary)</div>
+                                        <div class="col-span-2">{{ $bus_issue[0]->business_issue_name }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="row-span-2 m-2">
+                                    <div class="">
+                                        <p class="m-2 font-bold text-black">Description</p>
+                                    </div>
+                                    <div class="m-2 text-black">
+                                        <p>{{ $bus_issue[0]->issue_desc }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- problem 1 -->
+                        <div class="p-2">
+                            <div class="grid grid-flow-col grid-rows-3">
+                                <div class="row-span-1 m-2 self-center">
+                                    <div
+                                        class="float-left grid grid-flow-col grid-rows-2 rounded-full border-8 border-red-800 pr-4">
+                                        <div
+                                            class="text-center row-span-2 m-2 h-10 w-10 self-center rounded-full bg-red-800 text-3xl font-extrabold text-white">
+                                            2</div>
+                                        <div class="col-span-2 font-bold">Area of Asisstance Needed (Secondary)</div>
+                                        <div class="col-span-2">{{ $bus_issue[1]->business_issue_name }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="row-span-2 m-2">
+                                    <div class="">
+                                        <p class="m-2 font-bold text-black">Description</p>
+                                    </div>
+                                    <div class="m-2 text-black">
+                                        <p>{{ $bus_issue[1]->issue_desc }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- problem 1 -->
+                        <div class="p-2">
+                            <div class="grid grid-flow-col grid-rows-3">
+                                <div class="row-span-1 m-2 self-center">
+                                    <div
+                                        class="float-left grid grid-flow-col grid-rows-2 rounded-full border-8 border-green-700 pr-4">
+                                        <div
+                                            class="text-center row-span-2 m-2 h-10 w-10 self-center rounded-full bg-green-700 text-3xl font-extrabold text-white">
+                                            3</div>
+                                        <div class="col-span-2 font-bold">Area of Asisstance Needed (Tertiary)</div>
+                                        <div class="col-span-2">{{ $bus_issue[2]->business_issue_name }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="row-span-2 m-2">
+                                    <div class="">
+                                        <p class="m-2 font-bold text-black">Description</p>
+                                    </div>
+                                    <div class="m-2 text-black">
+                                        <p>{{ $bus_issue[2]->issue_desc }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="p-2">
+                        <h2 class="font-bold text-black">Leadership Issues</h2>
+
+                        <div class="grid gap-2 p-2 sm:grid-cols-2">
+                            @foreach ($leadership_issue as $item)
+                                <div class="float-left flex w-full gap-2 rounded-full border-8 border-sky-700  p-2">
+                                    <div
+                                        class="text-center h-10 w-10 rounded-full bg-sky-700 text-3xl font-extrabold text-white">
+                                        1</div>
+                                    <div class="text-md self-center  font-bold sm:text-lg md:row-start-2">
+                                        {{ $item->issue_name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- START Documents ROW -->
                 <div class="rounded shadow-lg border-2 border-gray-200 mx-2 my-4 p-2">
                     <div class="mx-3 flex flex-row px-2 py-3">
@@ -227,26 +348,15 @@
 
                     <div>
                         <div>
-                            <div class="mb-2 grid grid-cols-2 divide-x">
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">Registration Certificate</div>
-                                <button
-                                    class="w-32 rounded-xl border border-blue-700 bg-blue-500 px-4 font-bold text-white hover:bg-blue-700">VIEW</button>
-                            </div>
-                            <div class="mb-2 grid grid-cols-2 divide-x">
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">Owner's IC</div>
-                                <button
-                                    class="w-32 rounded-xl border border-blue-700 bg-blue-500 px-4 font-bold text-white hover:bg-blue-700">VIEW</button>
-                            </div>
-                            <div class="mb-2 grid grid-cols-2 divide-x">
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">Financials Statement</div>
-                                <button
-                                    class="w-32 rounded-xl border border-blue-700 bg-blue-500 px-4 font-bold text-white hover:bg-blue-700">VIEW</button>
-                            </div>
-                            <div class="mb-2 grid grid-cols-2 divide-x">
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">EPF Contribution Statement</div>
-                                <button
-                                    class="w-32 rounded-xl border border-blue-700 bg-blue-500 px-4 font-bold text-white hover:bg-blue-700">VIEW</button>
-                            </div>
+                            @foreach ($string_document as $key => $item)
+                                <div class="mb-2 grid grid-cols-2 divide-x">
+                                    <div class="mx-3 mb-2 px-2 font-bold text-black">{{ $item }}</div>
+                                    <button onclick="openPreview('{{ asset($string_path[$key]) }}')"
+                                        class="w-24 rounded-md border border-blue-700 bg-blue-500 px-4 text-sm font-bold text-white hover:bg-blue-700">
+                                        VIEW</button>
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -261,16 +371,16 @@
                     </div>
 
                     <div class="mx-auto flex h-72 w-full max-w-lg overflow-hidden rounded-lg bg-gray-500 shadow-md">
-                        <div class="mx-24 flex flex-col justify-end">
-                            <div class="relative">
-                                <video class=" ">
-                                    <source class="h-72 w-72 bg-black" src="" type="video/mp4" />
+                        <div class="m-4 p-4 flex flex-col justify-center">
+                            <div class="relative mt-2">
+                                <video id="videoInterview" width="600" controls>
+                                    <source id="videoDiv" src="{{ asset($video_path) }}" type="video/mp4">
+
+                                    Your browser does not support HTML video.
                                 </video>
-                                <div class="absolute bottom-0 w-full bg-gradient-to-r from-black">
-                                    <span class="px-2 text-xs uppercase text-white"> Ekuinas </span>
-                                </div>
+
                             </div>
-                            <div>
+                            {{-- <div>
                                 <div>
                                     <div class="relative h-1 bg-gray-200">
                                         <div class="absolute flex h-full w-1/2 items-center justify-end bg-blue-500">
@@ -305,7 +415,7 @@
                                     </div>
                                     <div>3:00</div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -317,7 +427,7 @@
         <!-- EVALUATION DIV bg-yellow-200-->
         <div class="max-h-screen overflow-y-auto rounded-xl col-span-3">
             <!-- START Status ROW -->
-            <div class="h-80 gap-3 overflow-y-auto scrollbar-hide rounded-md sm:p-2">
+            <div class="h-80 gap-3 scrollbar-hide rounded-md sm:p-2">
 
                 {{ $no }}
                 {{ $statusComponent }}
@@ -328,11 +438,11 @@
             </div>
 
             <div
-                class="scrollbar-hide mt-8 flex max-h-96 flex-1 flex-col overflow-y-auto rounded-md py-1 shadow-2xl sm:p-2">
+                class="mt-8 flex overflow-y-auto flex-1 flex-col rounded shadow-lg py-1 border-2 border-gray-200 sm:p-2">
                 <div class="mx-2 my-2 font-bold text-black">Evaluation</div>
-                <div class="flex flex-1 flex-col gap-8 pb-8">
+                <div class="flex flex-1 flex-col gap-4 pb-8">
                     <!-- START Score Summary -->
-                    <div class="w-full rounded-2xl shadow-xl">
+                    <div class="rounded shadow-lg border-2 border-gray-200 m-1 p-2">
                         <div class="mx-3 flex flex-row px-2 py-3">
                             <div class="h-auto w-auto rounded-lg border-2 border-gray-600">
                                 <div class="mx-3 px-2 font-semibold text-gray-600">Score Summary</div>
@@ -342,7 +452,7 @@
                         <div class="my-2 grid grid-cols-3 gap-2">
                             <div class="col-span-1 grid">
                                 <div class="mx-3 mb-6 px-2 font-bold text-black">Automatic Score</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Manual Score</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">Video Score</div>
                                 <div class="mx-3 mb-6 px-2 font-bold text-black">Interview Score</div>
                                 <div class="mx-3 mb-6 px-2 font-bold text-black">Total Score</div>
                             </div>
@@ -353,79 +463,53 @@
                                 <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
                             </div>
                             <div class="col-span-1 -ml-8 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">{{ $automaticTotalScore }}</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">{{ $videoTotalScore }}</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">{{ $interviewScore }}</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">
+                                    {{ $automaticTotalScore + $videoTotalScore + $interviewScore }}</div>
                             </div>
                         </div>
                     </div>
                     <!-- END Score Summary -->
 
                     <!--START Automatic Score -->
-                    <div class="w-full rounded-2xl shadow-xl">
+                    <div class="rounded shadow-lg border-2 border-gray-200 m-1 p-2">
                         <div class="mx-3 flex flex-row px-2 py-3">
                             <div class="h-auto w-auto rounded-lg border-2 border-gray-600">
-                                <div class="mx-3 px-2 font-semibold text-gray-600">Score Summary</div>
+                                <div class="mx-3 px-2 font-semibold text-gray-600">Automatic Score Summary</div>
                             </div>
                         </div>
 
                         <div class="my-2 grid grid-cols-3 gap-2">
                             <div class="col-span-1 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Automatic Score</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Manual Score</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Interview Score</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Bumiputera Score</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Revenue Score</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Staf Score</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Document Score</div>
                                 <div class="mx-3 mb-6 px-2 font-bold text-black">Total Score</div>
                             </div>
                             <div class="col-span-1 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
                                 <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
                             </div>
                             <div class="col-span-1 -ml-8 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $automaticScore['bumi'] }}</div>
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $automaticScore['revenue'] }}</div>
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $automaticScore['staf'] }}</div>
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $automaticScore['document'] }}</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">{{ $automaticTotalScore }} / 5
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- END Automatic Score -->
 
                     <!-- START Interview Score -->
-                    <div class="w-full rounded-2xl shadow-xl">
-                        <div class="mx-3 flex flex-row px-2 py-3">
-                            <div class="h-auto w-auto rounded-lg border-2 border-gray-600">
-                                <div class="mx-3 px-2 font-semibold text-gray-600">Interview Score</div>
-                            </div>
-                        </div>
-
-                        <div class="my-2 grid grid-cols-3 gap-2">
-                            <div class="col-span-1 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Automatic Score</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Manual Score</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Interview Score</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">Total Score</div>
-                            </div>
-                            <div class="col-span-1 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
-                            </div>
-                            <div class="col-span-1 -ml-8 grid">
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-6 px-2 font-bold text-black">00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Interview Score -->
-
-                    <!-- START Video Score -->
-                    <div class="w-full rounded-2xl shadow-xl">
+                    <div class="rounded shadow-lg border-2 border-gray-200 m-1 p-2">
                         <div class="mx-3 flex flex-row px-2 py-3">
                             <div class="h-auto w-auto rounded-lg border-2 border-gray-600">
                                 <div class="mx-3 px-2 font-semibold text-gray-600">Video Score</div>
@@ -434,22 +518,46 @@
 
                         <div class="my-2 grid grid-cols-3 gap-2">
                             <div class="col-span-1 grid">
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">Automatic Score</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">Manual Score</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">Interview Score</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Score 1</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Score 2</div>
+                                <div class="mx-3 mb-6 px-2 text-black">Score 3</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">Total Score</div>
+                            </div>
+                            <div class="col-span-1 grid">
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 text-black">:</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">:</div>
+                            </div>
+                            <div class="col-span-1 -ml-8 grid">
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $videoScore[0]->video_score }}</div>
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $videoScore[1]->video_score }}</div>
+                                <div class="mx-3 mb-6 px-2 text-black">{{ $videoScore[2]->video_score }}</div>
+                                <div class="mx-3 mb-6 px-2 font-bold text-black">{{ $videoTotalScore }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Interview Score -->
+
+                    <!-- START Video Score -->
+                    <div class="rounded shadow-lg border-2 border-gray-200 m-1 p-2">
+                        <div class="mx-3 flex flex-row px-2 py-3">
+                            <div class="h-auto w-auto rounded-lg border-2 border-gray-600">
+                                <div class="mx-3 px-2 font-semibold text-gray-600">Interview Score</div>
+                            </div>
+                        </div>
+
+                        <div class="my-2 grid grid-cols-3 gap-2">
+                            <div class="col-span-1 grid">
                                 <div class="mx-3 mb-2 px-2 font-bold text-black">Total Score</div>
+
                             </div>
                             <div class="col-span-1 grid">
                                 <div class="mx-3 mb-2 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">:</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">:</div>
+
                             </div>
                             <div class="col-span-1 -ml-8 grid">
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">00</div>
-                                <div class="mx-3 mb-2 px-2 font-bold text-black">00</div>
+                                <div class="mx-3 mb-2 px-2 font-bold text-black">{{ $interviewScore }}</div>
                             </div>
                         </div>
                     </div>
@@ -458,6 +566,33 @@
             </div>
         </div>
         <!-- EVALUATION DIV -->
+    </div>
+
+    <div id="previewFile"
+        class="fixed hidden z-50 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full px-4">
+        <div class="mt-4 relative top-40 mx-auto shadow-lg rounded-md bg-white bg-opacity-10 max-w-xl">
+
+            <!-- Modal header -->
+            <div class="flex justify-between items-center bg-green-500 text-white text-xl rounded-t-md px-4 py-2">
+                <p class="text-white">Photo Preview:</p>
+
+                {{-- <img id="imgDiv" width="700" height="700" src=""> --}}
+
+                <button onclick="closeModal2('previewFile')">x</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="max-h-48 overflow-y-scroll p-4">
+                <p class="text-sm text-gray-800" id="message"></p>
+                <img id="imgDiv" width="700" height="700" src="">
+            </div>
+
+            <!-- Modal footer -->
+            <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                    onclick="closeModal2('previewFile')">Close</button>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -554,5 +689,30 @@
         function test() {
             Livewire.emit('submitreview');
         }
+
+        function openModal(modalId) {
+            modal = document.getElementById(modalId)
+            modal.classList.remove('hidden')
+        }
+
+        function closeModal2(modalId) {
+            modal = document.getElementById(modalId);
+            modal.classList.add('hidden');
+        }
+
+        function openPreview(src) {
+            $('#imgDiv').attr("src", src);
+            openModal('previewFile');
+        }
+
+        Livewire.on('openPreview2', event => {
+            // alert('hai');
+
+            // alert(event);
+            // document.getElementById("imgDiv").src="newSource.png";
+            $('#imgDiv').attr("src", event);
+            // alert($('#imgDiv'));
+            openModal('previewFile');
+        })
     </script>
 </div>

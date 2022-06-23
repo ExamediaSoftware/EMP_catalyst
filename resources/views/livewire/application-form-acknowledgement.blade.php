@@ -44,14 +44,30 @@
                 @error('acknowledgement_checkbox')
                     <span class="pl-3 error text-xs text-red-400">{{ $message }}</span>
                 @enderror
-                
+                {{-- {{$error_sini}} --}}
+                @if (count($error_sini))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">Please complete tab:</strong>
+                        <ul>
+                            @foreach ($error_sini as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        
+                    </div>
+                @endif
             </div>
 
             <div class="flex justify-center p-2">
-               
+
                 <button type="submit"
                     class="w-1/4 px-4 py-2 text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 rounded shadow-xl">
-                    @if($application->currentStatus->status_id == 'Queried') RESUBMIT APPLICATION @else SUBMIT APPLICATION @endif</button>
+                    @if ($application->currentStatus->status_id == 'Queried')
+                        RESUBMIT APPLICATION
+                    @else
+                        SUBMIT APPLICATION
+                    @endif
+                </button>
 
 
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\ApplicationStatus;
 use App\Models\Financial;
+use App\Models\FormChecklist;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -44,6 +45,30 @@ class ApplicationFormFinancial extends Component
         // financial_year
         // financial_revenue
         // financial_expenses
+
+        $c = FormChecklist::where([
+            ['tab_name', '=', 'Financial'],
+            ['tab_status', '=', 1]
+        ])->count();
+
+        // dd($c);
+
+        if ($c < 2) {
+            // dd('here');
+        } else {
+
+            $checklist = FormChecklist::updateOrCreate(
+                [
+                    'application_id' =>  $this->application->id,
+                    'tab_name' => 'Financial',
+                ],
+                [
+                    'application_id' => $this->application->id,
+                    'tab_name' => 'General',
+                    'tab_status' => 0,
+                ]
+            );
+        }
 
         $validatedData = $this->validate(
             [
@@ -102,6 +127,18 @@ class ApplicationFormFinancial extends Component
             'status_id' => 'AS01',
             'created_by' => Auth::user()->id,
         ]);
+
+        $checklist = FormChecklist::updateOrCreate(
+            [
+                'application_id' =>  $this->application->id,
+                'tab_name' => 'Financial',
+            ],
+            [
+                'application_id' => $this->application->id,
+                'tab_name' => 'Financial',
+                'tab_status' => 1,
+            ]
+        );
 
         $this->dispatchBrowserEvent('showModal', ['message' => "Data updated"]);
     }

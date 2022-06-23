@@ -13,4 +13,11 @@ class AssistanceLeadershipIssue extends Model
         'application_id',
         'issue',     
     ];
+
+    protected $appends = ['issue_name'];
+
+    public function getIssueNameAttribute()
+    {
+        return Parameter::where('type_id','=',$this->issue)->first()->type_name;
+    }
 }
